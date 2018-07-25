@@ -117,15 +117,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# We need to override the default message storage, since cloud9 has a cookie bug
-# https://stackoverflow.com/a/34828308/493553
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-
-# Method of sending an email via the backend to your console
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get("EMAIL_ADDRESS")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 EMAIL_PORT = 587
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth'
+]
