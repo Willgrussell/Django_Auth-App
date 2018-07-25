@@ -25,12 +25,12 @@ class EmailAuth:
         Used by the Django authentiation system to retrieve a user instance
         """
         
-        # try:
-        #     user = User.objects.get(pk=user_id)
+        try:
+            user = User.objects.get(pk=user_id)
 
-        #     if user.is_valid():
-        #         return user
+            if user.is_active:
+                return user
 
-        #     return None
-        # except User.DoesNotExist:
-        #     return None
+            return None
+        except User.DoesNotExist:
+            return None
